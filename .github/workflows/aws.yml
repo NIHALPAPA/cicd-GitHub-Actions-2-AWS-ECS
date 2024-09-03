@@ -63,3 +63,23 @@ jobs:
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
+        
+integration-tests:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run integration tests
+        run: |
+          # Add your integration testing commands here
+          curl -f http://simple-deploy-lb-1473463100.us-east-1.elb.amazonaws.com || exit 1
+
+  rollback:
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Rollback on failure
+        run: |
+          aws ecs update-service --cluster simple-deploy --service simple-deploy --desired-count 0
+          sleep 60
+          aws ecs update-service --cluster simple-deploy --service simple-deploy --desired-count 1
+  
