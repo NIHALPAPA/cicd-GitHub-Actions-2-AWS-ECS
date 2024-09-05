@@ -1,13 +1,13 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:766280907974:task-definition/simple-deploy:14",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:766280907974:task-definition/simple-taskdefinition:1",
     "containerDefinitions": [
         {
-            "name": "simple-deploy",
-            "image": "766280907974.dkr.ecr.us-east-1.amazonaws.com/simple-deploy",
+            "name": "simple-container",
+            "image": "766280907974.dkr.ecr.us-east-1.amazonaws.com/simple-application",
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "container-port-1",
+                    "name": "simple-container-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
@@ -23,7 +23,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/simple-deploy",
+                    "awslogs-group": "/ecs/simple-taskdefinition",
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
@@ -35,11 +35,10 @@
             "systemControls": []
         }
     ],
-    "family": "simple-deploy",
-    "taskRoleArn": "arn:aws:iam::766280907974:role/ecsTaskExecutionRole",
+    "family": "simple-taskdefinition",
     "executionRoleArn": "arn:aws:iam::766280907974:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 14,
+    "revision": 1,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -57,9 +56,6 @@
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
@@ -88,7 +84,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-09-03T11:07:47.242Z",
+    "registeredAt": "2024-09-05T06:55:41.831Z",
     "registeredBy": "arn:aws:iam::766280907974:root",
     "tags": []
 }
